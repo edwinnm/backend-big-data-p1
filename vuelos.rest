@@ -1,0 +1,23 @@
+###
+GET http://localhost:3000/api/vuelos
+
+####
+POST http://localhost:3000/api/vuelos
+Content-Type: application/json
+
+{
+    "Year": "2000",
+    "Month": "01",
+    "DayofMonth": "14",
+    "DayOfWeek": "2"
+}
+
+###
+GET http://localhost:3000/api/vuelos/5fbbe87e9b27601ac78fa5c2
+
+
+###
+DELETE  http://localhost:3000/api/vuelos/5fbbe87e9b27601ac78fa5c2
+
+
+
