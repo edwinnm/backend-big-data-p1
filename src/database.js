@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test', {
-    useUnifiedTopology: true,
-    useNewUrlParser:true
-})
+mongoose.connect('mongodb://192.168.56.101/test', {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    })
     .then(db => console.log("DB is connected"))
-    .catch((err) => console.err(err))
+    .catch(err => console.log("Hay un error en la conexion de la DB"));
