@@ -4,7 +4,7 @@ const vuelosCtrl = {};
 const Vuelo = require('../models/Vuelo');
 
 vuelosCtrl.getVuelos = async (req, res) => {
-    const vuelos = await Vuelo.find();
+    const vuelos = await Vuelo.find().limit(30);
     res.json(vuelos);
 };
 vuelosCtrl.createVuelo = async (req, res) => {
@@ -15,7 +15,8 @@ vuelosCtrl.createVuelo = async (req, res) => {
 
 };
 vuelosCtrl.getVuelo = async (req, res) => {
-    const vuelo = await Vuelo.findById( req.params.id)
+    console.log(req.body);
+    const vuelo = await Vuelo.find( req.body ).limit(30);
     res.json(vuelo);
 };
 vuelosCtrl.updateVuelo = async (req, res) => {

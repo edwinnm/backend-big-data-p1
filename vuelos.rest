@@ -13,7 +13,15 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/vuelos/5fbbe87e9b27601ac78fa5c2
+GET http://localhost:3000/api/vuelos/limit
+Content-Type: application/json
+
+{
+    "Month": "11",
+    "DayofMonth": "14"
+    
+    
+}
 
 
 ###

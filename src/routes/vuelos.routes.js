@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', vuelosCtrl.getVuelos);
 router.post('/', vuelosCtrl.createVuelo);
-router.get('/:id', vuelosCtrl.getVuelo);
+router.get('/limit', vuelosCtrl.getVuelo);
 router.put('/:id', vuelosCtrl.updateVuelo);
 router.delete('/:id', vuelosCtrl.deleteVuelo);
 
