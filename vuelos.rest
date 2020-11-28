@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3000/api/vuelos
+GET http://localhost:3000/api/vuelos/2007
 
 ####
 POST http://localhost:3000/api/vuelos
@@ -7,19 +7,19 @@ Content-Type: application/json
 
 {
     "Year": "1987",
-    "Month": "01",
+    "Month": "100",
     "DayofMonth": "14",
     "DayOfWeek": "2"
 }
 
 ###
-GET http://localhost:3000/api/vuelos/limit/1987/
+GET http://localhost:3000/api/vuelos/limit/2000/
 Content-Type: application/json
 
 {
-    "Month": "12", 
-    "_id": "5fbc29171a1d354f3c7423aa"
-    
+    "Month": "1",
+    "DayofMonth": "1",
+    "DayOfWeek": "1"
 }
 
 
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:3000/api/vuelos/1987/5fbc29171a1d354f3c7423aa
+PUT http://localhost:3000/api/vuelos/1987/5fbfd21c553fb20fec7baa4f
 Content-Type: application/json
 
 {
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 
 ###
-DELETE  http://localhost:3000/api/vuelos/1987/5fbc29171a1d354f3c7423aa
+DELETE  http://localhost:3000/api/vuelos/1987/5fbfd21c553fb20fec7baa4f
 
 
 

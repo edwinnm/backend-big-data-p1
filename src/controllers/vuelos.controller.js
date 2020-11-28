@@ -4,7 +4,8 @@ const vuelosCtrl = {};
 const modelos = require('../models/Vuelo');
 
 vuelosCtrl.getVuelos = async(req, res) => {
-    const vuelos = await Vuelo.find().limit(30);
+    const Vuelo = modelos[`c${ req.params.year.substring(2,4) }`];
+    const vuelos = await Vuelo.find({}).limit(30);
     res.json(vuelos);
 };
 

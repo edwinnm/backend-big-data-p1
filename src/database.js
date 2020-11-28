@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://192.168.56.101/test', {
+mongoose.connect('mongodb://127.0.0.1/BigDataVuelos', {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })

@@ -4,7 +4,7 @@ const vuelosCtrl = require('../controllers/vuelos.controller');
 const router = Router();
 
 
-router.get('/', vuelosCtrl.getVuelos);
+router.get('/:year', vuelosCtrl.getVuelos);
 router.post('/', vuelosCtrl.createVuelo);
 router.get('/limit/:year', vuelosCtrl.getVuelo);
 router.put('/:year/:id', vuelosCtrl.updateVuelo);
