@@ -1,29 +1,23 @@
 ###
-GET http://localhost:3000/api/vuelos/2007
+GET http://localhost:3000/api/pelis
 
 ####
-POST http://localhost:3000/api/vuelos
+POST http://localhost:3000/api/pelis
 Content-Type: application/json
 
 {
     "Year": "1987",
-    "Month": "100",
-    "DayofMonth": "14",
-    "DayOfWeek": "2"
+    "Title": "La pelicula"
 }
 
 ###
-GET http://localhost:3000/api/vuelos/limit/2000/
+GET http://localhost:3000/api/pelis/peli
 Content-Type: application/json
 
 {
-    "Month": "1",
-    "DayofMonth": "1",
-    "DayOfWeek": "1"
+    "Title": "La pelicula",
+    "Id": 180
 }
-
-
-
 
 
 ###
@@ -36,9 +30,8 @@ Content-Type: application/json
 }
 
 
-
 ###
-DELETE  http://localhost:3000/api/vuelos/1987/5fbfd21c553fb20fec7baa4f
+DELETE  http://localhost:3000/api/pelis/180
 
 
 

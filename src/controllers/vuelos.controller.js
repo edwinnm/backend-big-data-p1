@@ -3,26 +3,86 @@
 const vuelosCtrl = {};
 const modelos = require('../models/Vuelo');
 
-vuelosCtrl.getVuelos = async(req, res) => {
-    const Vuelo = modelos[`c${ req.params.year.substring(2,4) }`];
-    const vuelos = await Vuelo.find({}).limit(30);
-    res.json(vuelos);
+
+const neo4j = require('neo4j-driver')
+const uri= 'bolt://localhost:7687'
+const user = 'admin'
+const password = 'admin';
+const driver = neo4j.driver(uri, neo4j.auth.basic(user, password))
+const session = driver.session()
+
+vuelosCtrl.getMovies = async(req, res) => {   
+    
+    session
+        .run('MATCH(n:Movie) RETURN n LIMIT 25')
+        .then(function(result){
+            var pelis = [];
+            result.records.forEach(function(record){
+                console.log(record._fields[0].properties);
+                pelis.push(record._fields[0].properties);
+            });
+            res.json(pelis);
+        })
+        .catch( function(result){
+            res.json({})
+        })
+           
 };
 
-vuelosCtrl.createVuelo = async(req, res) => {
-    let Vuelo = modelos[`c${ req.body.Year.substring(2,4) }`];
-    console.log(Vuelo)
-    const newVuelo = new Vuelo(req.body);
-    await newVuelo.save();
-    res.json({ message: "Vuelo creado", vuelo: newVuelo });
-
+vuelosCtrl.createMovie = async(req, res) => {
+    var year = req.body.Year;
+    var title = req.body.Title;
+    session
+        .run('CREATE(n:Movie {title:"'+ title+'", year:'+year+'}) RETURN n')
+        .then(function(result){
+            //console.log(result);
+            res.json({ message: "Pelicula creada", peli: result });            
+            //session.close();
+//          res.json(pelis);
+        })
+        .catch( function(err){
+            console.log(err);
+        })    
 };
 
-vuelosCtrl.getVuelo = async(req, res) => {
-    const Vuelo = modelos[`c${ req.params.year.substring(2,4) }`];
-    const vuelo = await Vuelo.find(req.body).limit(30);
-    res.json(vuelo);
+vuelosCtrl.getMovie = async(req, res) => {
+
+    //MATCH (movie:Movie) WHERE (movie.title= "La pelicula" ) RETURN movie.title
+    var title = req.body.Title;
+    if(req.body.Id){
+        
+        session
+        .run('MATCH (movie:Movie) WHERE ID(movie) = '+ req.body.Id+' RETURN movie')
+        .then(function(result){
+            var pelis = [];
+                result.records.forEach(function(record){
+                    //console.log(record._fields[0].properties);
+                    pelis.push(record._fields[0].properties);
+                });
+                res.json(pelis);
+        })
+        .catch( function(err){
+            console.log(err);
+        }) 
+    }else{
+        session
+        .run('MATCH (movie:Movie) WHERE (movie.title = "'+ title+'") RETURN movie')
+        .then(function(result){
+            var pelis = [];
+                result.records.forEach(function(record){
+                    //console.log(record._fields[0].properties);
+                    pelis.push(record._fields[0].properties);
+                });
+                res.json(pelis);
+        })
+        .catch( function(err){
+            console.log(err);
+        }) 
+    }
+
+    
 };
+//MATCH (movie:Movie) WHERE ID(movie) = 179 RETURN movie
 
 vuelosCtrl.updateVuelo = async(req, res) => {
     const Vuelo = modelos[`c${ req.params.year.substring(2,4) }`];
@@ -31,10 +91,20 @@ vuelosCtrl.updateVuelo = async(req, res) => {
 };
 
 
-vuelosCtrl.deleteVuelo = async(req, res) => {
-    const Vuelo = modelos[`c${ req.params.year.substring(2,4) }`];
-    await Vuelo.findByIdAndDelete(req.params.id);
-    res.json({ message: "Vuelo eliminado" });
+vuelosCtrl.deleteMovie = async(req, res) => {
+    session
+    .run('MATCH (n) where id(n) = '+ req.params.id +' DETACH DELETE n')
+    .then(function(result){
+        //console.log(result);
+        res.json({ message: "Pelicula eliminada", peli: result });            
+        //session.close();
+//          res.json(pelis);
+    })
+    .catch( function(err){
+        console.log(err);
+    })    
+    //MATCH (n) where id(n) = 179 DETACH DELETE n
+
 };
 
 
