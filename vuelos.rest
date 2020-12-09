@@ -15,23 +15,24 @@ GET http://localhost:3000/api/pelis/peli
 Content-Type: application/json
 
 {
-    "Title": "La pelicula",
-    "Id": 180
-}
-
-
-###
-PUT http://localhost:3000/api/vuelos/1987/5fbfd21c553fb20fec7baa4f
-Content-Type: application/json
-
-{
-    "Month": "12"
+    "Title": "La pelicula"
     
 }
 
 
 ###
-DELETE  http://localhost:3000/api/pelis/180
+PUT http://localhost:3000/api/pelis/182
+Content-Type: application/json
+
+{
+    "Year": "1111",
+    "Title": "La pelicula 2"
+    
+}
+
+
+###
+DELETE  http://localhost:3000/api/pelis/181
 
 
 
